@@ -52,7 +52,7 @@
                 {{ Twig.for("category", "categoryBreadcrumbs[:categoryBreadcrumbs | length - 1]", "not break") }}
                     {{ Twig.if("category.details[0]") }}
                         <li class="breadcrumb-item">
-                            <a href="{{ Twig.print(Twig.call("services.category.getURLById", [Twig.var("category.id")])) }}">
+                            <a href="{{ Twig.print(Twig.call("services.category.getURLById", [Twig.var("category.id")])) }}?facets=7%2C11">
                                 {{ Twig.print("category.details[0].name") }}
                             </a>
                             {{ Twig.set('crumb', '
