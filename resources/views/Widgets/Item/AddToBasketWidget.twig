@@ -21,11 +21,11 @@
 <div class="widget widget-add-to-basket widget-{{ appearance }}
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
-    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %} v-if="$store.getters.currentItemVariation.variation.availability.id != 7">
 
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::SingleItem.BeforeAddToBasket", Twig.var("item.documents[0].data")])) }}
     
-    <div class="w-100" v-if="$store.state.item.variation.documents && $store.getters.currentItemVariation.variation.availability.id != 7">
+    <div class="w-100" v-if="$store.state.item.variation.documents">
 
         {{ AddToBasket.printVueComponent(
             "$store.state.item.variation.documents[0].data",
