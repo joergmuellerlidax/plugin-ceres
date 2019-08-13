@@ -18,10 +18,6 @@
 {% set buttonSize = widget.settings.buttonSize.mobile | default("md") %}
 {% set appearance = widget.settings.appearance.mobile | default("primary") %}
 
-<span>Verfügbarkeit:  ${ $store.getters.currentVariation.variation.availability.names.name }</span>
-<span>Verfügbarkeit:  ${ $store.getters.currentItemVariation.variation.availability.names.name }</span>
-<span>Verfügbarkeit:  ${ $store.getters.currentItemVariation.variation.availability.names.name }</span>
-
 <div class="widget widget-add-to-basket widget-{{ appearance }}
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
