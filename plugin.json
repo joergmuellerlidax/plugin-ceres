@@ -1,7 +1,7 @@
 {
     "version"           : "4.1.2",
-    "name"              : "Ceres",
-    "marketplaceName"   : {"de": "Ceres","en": "Ceres"},
+    "name"              : "LidaxCeres",
+    "marketplaceName"   : {"de": "LidaxCeres","en": "LidaxCeres"},
     "description"       : "This is the official Ceres plugin developed by plentymarkets. Ceres is the default template plugin for plentymarkets 7 online stores.",
     "author"            : "plentysystems AG",
     "license"           : "AGPL-3.0",
