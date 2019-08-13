@@ -75,7 +75,7 @@
                         <span v-if="item.variation.mayShowUnitPrice">&nbsp;| ${ item.prices.default.basePrice }</span>
                     </div>
                     {{ AddToBasket.printVueComponent( "item", false, false, { ":has-price": "item | hasItemDefaultPrice" } ) }}
-                    <span class="vat small text-muted">
+                    <span class="vat small text-muted" v-if="item.variation.availability.id != 7">
                         * <span v-if="showNetPrices">{{ trans("Ceres::Template.itemExclVAT") }}</span>
                         <span v-else>{{ trans("Ceres::Template.itemInclVAT") }}</span>
                         {{ trans("Ceres::Template.itemExclusive") }}
