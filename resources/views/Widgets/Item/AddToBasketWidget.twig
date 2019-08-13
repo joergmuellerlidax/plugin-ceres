@@ -25,7 +25,7 @@
 
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::SingleItem.BeforeAddToBasket", Twig.var("item.documents[0].data")])) }}
     
-    <div class="w-100" v-if="$store.state.item.variation.documents">
+    <div class="w-100" v-if="$store.state.item.variation.documents && $store.getters.currentItemVariation.variation.availability.id != 7">
 
         {{ AddToBasket.printVueComponent(
             "$store.state.item.variation.documents[0].data",
