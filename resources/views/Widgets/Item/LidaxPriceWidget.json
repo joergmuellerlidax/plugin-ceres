@@ -1,1 +1,25 @@
-
+{
+    "identifier": "Ceres::LidaxPriceWidget",
+    "label": "Widget.itemPriceLabel",
+    "previewImageURL": "/images/widgets/item-price.svg",
+    "type": "item",
+    "categories": ["item"],
+    "position": 400,
+    "widgetClass": "Ceres\\Widgets\\Item\\LidaxPriceWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "showCrossPrice": {
+            "type": "checkbox",
+            "defaultValue": true,
+            "options": {
+                "name": "Widget.showCrossPriceLabel"
+            }
+        },
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "none",
+            "options": "@include(optionalAppearance)"
+        },
+        "spacing":"@include(spacingMargin)"
+    }
