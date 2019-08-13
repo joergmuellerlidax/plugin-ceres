@@ -15,18 +15,10 @@
 <hr>
 
 <div class="mb-5">
-    <p class="articlenumber small text-muted">
+    <span class="articlenumber small text-muted">
         <b>{{ trans("Ceres::Template.singleItemNumber") }} </b>
-        <span>${ currentVariation.item.id }</span>
-    </p>
-    <p class="articlenumber small text-muted">
-        <b>{{ trans("Ceres::Template.singleItemCondition") }}</b>
-        <span>${ currentVariation.item.condition.names.name }</span>
-    </p>
-    <p class="articlenumber small text-muted" v-if="currentVariation.variation.intervalOrderQuantity > 1">
-        <b>Verpackungseinheit:</b>
-        <span>${ currentVariation.variation.intervalOrderQuantity }</span>
-    </p>
+        <span>${ currentVariation.variation.number }</span>
+    </span>
 </div>
 
 <!-- Variation -->
@@ -55,7 +47,7 @@
     </div>
 {% endif %}
 
-<span class="price h1" v-if="currentVariation.variation.availability.id != 7">
+<span class="price h1">
     <span :content="currentVariation.prices.default.price.value">
         ${ variationTotalPrice | currency(currentVariation.prices.default.currency) }
     </span>
@@ -63,7 +55,7 @@
     <span :content="currentVariation.prices.default.currency"></span>
 </span>
 
-<div class="base-price text-muted my-3" v-if="currentVariation.unit && currentVariation.variation.availability.id != 7">
+<div class="base-price text-muted my-3" v-if="currentVariation.unit">
     <div>
         {{ trans("Ceres::Template.singleItemContent") }}
         <span>${ currentVariation.unit.content | numberFormat } </span>
@@ -90,7 +82,7 @@
         <slot name="before-add-to-basket"></slot>
     </div>
 
-    <div class="col-12 col-sm-7 col-md-12 col-lg-8 my-3" v-if="currentVariation.variation.availability.id != 7">
+    <div class="col-12 col-sm-7 col-md-12 col-lg-8 my-3">
         {{ AddToBasket.printVueComponent(
             "currentVariation",
             false,
@@ -127,104 +119,3 @@
                     </span>
 
 <slot name="additional-content-after-vat"></slot>
-
-CategoryItem.twig
-{{ component( "Ceres::Basket.Components.AddToBasket" ) }}
-{{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
-{{ component( "Ceres::ItemList.Components.ItemStoreSpecial" ) }}
-
-{% import "Ceres::Basket.Macros.AddToBasket" as AddToBasket %}
-
-{% if enableCarousel is not defined %}
-    {% if config("Ceres.item.enable_image_carousel") == "true" %}
-        {% set enableCarousel = "true" %}
-    {% else %}
-        {% set enableCarousel = "false" %}
-    {% endif %}
-{% endif %}
-
-<script type="x/template" id="vue-category-item">
-    <article class="cmp cmp-product-thumb cmp-product-thumb--grid">
-        <div class="thumb-inner" :class="paddingClasses" :style="paddingInlineStyles">
-
-            {{ AddToBasket.printVueComponent( "item", true, false, { ":has-price": "item | hasItemDefaultPrice" } ) }}
-
-            <div class="thumb-background"></div>
-            
-            <div class="thumb-image">
-                <div class="square-container">
-                    <div class="square-inner main-image">
-                        <slot name="item-image">
-                            <category-image-carousel template="#vue-category-image-carousel"
-                                                    :image-urls-data="item.images | itemImages(imageUrlAccessor)"
-                                                    :alt-text="item | itemName"
-                                                    :title-text="item | itemName"
-                                                    :item-url="item | itemURL"
-                                                    :enable-carousel="{{ enableCarousel }}"
-                                                    :disable-carousel-on-mobile="disableCarouselOnMobile"
-                                                    ref="categoryImageCarousel">
-                            </category-image-carousel>
-                        </slot>
-                    </div>
-                </div>
-            </div>
-
-            <!-- STORE SPECIALS -->
-            <slot name="store-special">
-                <item-store-special v-if="storeSpecial || item.variation.bundleType == 'bundle'"
-                                    :store-special="storeSpecial"
-                                    :recommended-retail-price="item.prices.rrp"
-                                    :variation-retail-price="item.prices.default"
-                                    :decimal-count="decimalCount"
-                                    :bundle-type="item.variation.bundleType"></item-store-special>
-            </slot>
-            <!-- ./STORE SPECIALS -->
-
-            <!-- ITEM DETAILS -->
-            <slot name="item-details">
-                <div class="thumb-content">
-                    <a :href="item | itemURL" class="thumb-title small">
-                        ${ item | itemName }<!--
-                        --><span v-for="attribute in item.groupedAttributes">${ "Ceres::Template.itemGroupedAttribute" | translate(attribute) }</span>
-                    </a>
-                    <div class="thumb-meta">
-                        <slot name="before-prices"></slot>
-
-                        <div class="prices" v-if="item.variation.availability.id != 7">
-                            <div v-if="item.prices.rrp && item.prices.rrp.price.value > 0 && item.prices.rrp.price.value > item.prices.default.unitPrice.value" class="price-view-port">
-                                <del class="crossprice" v-if="item.prices.specialOffer">
-                                    ${ item.prices.default.unitPrice.formatted | itemCrossPrice(true) }
-                                </del>
-                                <del class="crossprice" v-else>
-                                    ${ item.prices.rrp.unitPrice.formatted | itemCrossPrice }
-                                </del>
-                            </div>
-
-                            <div class="price">
-                                ${ item.prices.default.unitPrice.formatted | specialOffer(item.prices, "unitPrice", "formatted") } *
-                            </div>
-                        </div>
-                    </div>
-
-                    <slot name="after-prices"></slot>
-
-                    <div class="category-unit-price" v-if="!(item.unit.unitOfMeasurement === 'C62' && item.unit.content === 1)">
-                        <span>${ item.unit.content }</span>
-                        <span>&nbsp;${ item.unit.names.name }</span>
-                        <span v-if="item.variation.mayShowUnitPrice">&nbsp;| ${ item.prices.default.basePrice }</span>
-                    </div>
-
-                    {{ AddToBasket.printVueComponent( "item", false, false, { ":has-price": "item | hasItemDefaultPrice" } ) }}
-
-                    <span class="vat small text-muted">
-                        * <span v-if="showNetPrices">{{ trans("Ceres::Template.itemExclVAT") }}</span>
-                        <span v-else>{{ trans("Ceres::Template.itemInclVAT") }}</span>
-                        {{ trans("Ceres::Template.itemExclusive") }}
-                        <a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
-                    </span>
-                </div>
-            </slot>
-            <!-- ./ITEM DETAILS  -->
-        </div>
-    </article>
-</script>
