@@ -5,6 +5,7 @@
 {% block PartialHead %}
 
     {% set itemData = item.documents[0].data %}
+    {% set currentVariation = item.documents[0].data.currentVariation %}
     {% embed getPartial('page-metadata') %}
         {% block title          ItemName.get(itemData | itemName, itemData.variation.bundleType) %}
         {% block description    itemData.texts.metaDescription %}
