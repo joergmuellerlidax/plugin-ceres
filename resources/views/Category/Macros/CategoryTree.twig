@@ -11,7 +11,7 @@
                 {% endif %}
                     <li class="level{{ level }}">
                         {% set newScope = currentScopeUrl ~ "/" ~ child.details[0].nameUrl %}
-                        <a @touchstart.stop href="{{ newScope }}{{ urls.trailingSlashSuffix }}?facets=7%2C11">{{ child.details[0].name }}</a>
+                        <a @touchstart.stop href="{{ newScope }}{{ urls.trailingSlashSuffix }}?facets=59%2C60">{{ child.details[0].name }}</a>
                     </li>
                     {% if child.children %}
                         {{ childlist.get_children(child, newScope, level + 1, megaMenuLevels, maxItems) }}
@@ -21,7 +21,7 @@
                 {% endif %}
                 {% set counter = counter + 1 %}
                 {% if counter == maxItems[level]%}
-                    <li class="level{{ level }} bt-more"><a @touchstart.stop href="{{ currentScopeUrl }}?facets=7%2C11">{{ trans("Ceres::Template.itemShowMore") }}...</a></li>
+                    <li class="level{{ level }} bt-more"><a @touchstart.stop href="{{ currentScopeUrl }}?facets=59%2C60">{{ trans("Ceres::Template.itemShowMore") }}...</a></li>
                 {% endif %}
             {% endif %}
         {% endfor %}
@@ -50,7 +50,7 @@
             {% if category.children and translatedChildren > 0 %}
 
                 <li class="ddown" v-navigation-touch-handler>
-                    <a href="{{ currentScopeUrl }}{{ urls.trailingSlashSuffix }}?facets=7%2C11">{{ category.details[0].name }}</a>
+                    <a href="{{ currentScopeUrl }}{{ urls.trailingSlashSuffix }}?facets=59%2C60">{{ category.details[0].name }}</a>
 
                     <span class="d-lg-none nav-direction" data-toggle="collapse" href="#navDropdown{{ counter }}" aria-expanded="false">
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -64,7 +64,7 @@
                                     <li>
                                         <ul class="nav-dropdown-inner">
                                             <li>
-                                                <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}{{ urls.trailingSlashSuffix }}?facets=7%2C11">{{ child.details[0].name }}</a>
+                                                <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}{{ urls.trailingSlashSuffix }}?facets=59%2C60">{{ child.details[0].name }}</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -79,7 +79,7 @@
             {% else %}
 
                 <li>
-                    <a href="{{ currentScopeUrl }}{{ urls.trailingSlashSuffix }}?facets=7%2C11">{{ category.details[0].name }}</a>
+                    <a href="{{ currentScopeUrl }}{{ urls.trailingSlashSuffix }}?facets=59%2C60">{{ category.details[0].name }}</a>
                 </li>
 
             {% endif %}
@@ -101,7 +101,7 @@
         {% set currentUrl = currentUrl ~ "/" ~ category.details[0].nameUrl  %}
         <ul>
             <li class="nav-item{% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %} active{% endfor %}">
-                <a href="{{ currentUrl }}{{ urls.trailingSlashSuffix }}?facets=7%2C11" class="nav-link">{{ category.details[0].name }}</a>
+                <a href="{{ currentUrl }}{{ urls.trailingSlashSuffix }}?facets=59%2C60" class="nav-link">{{ category.details[0].name }}</a>
                 {% if category.children is not empty %}
                     {{ sidemenu.get_sidemenu(breadcrumbs, category.children, currentUrl) }}
                 {% endif %}
