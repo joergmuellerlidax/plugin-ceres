@@ -60,7 +60,7 @@
                             
                             <div class="item-small-prices">
                                 <strong>{{ trans("Ceres::Template.SingleItemCondition") }}</strong>
-                                <span></span>
+                                <span>${ basketItem.variation.data.item.condition.names.name }</span>
                             </div>                        
 
                             {% if services.template.isCurrentTemplate("tpl.checkout") %}
