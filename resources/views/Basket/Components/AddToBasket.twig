@@ -7,7 +7,7 @@
             <i v-waiting-animation="waiting" class="fa fa-cart-plus fa-lg mobile-icon-right"></i>
         </div>
 
-        <div class="add-to-basket-lg-container hidden-md-down" v-if="!showQuantity && useLargeScale && !canBeAddedToBasket"
+        <div class="add-to-basket-lg-container hidden-md-down" v-if="!showQuantity && useLargeScale && !canBeAddedToBasket && item.variation.availability.id != 7"
              v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.itemShowItem") }}" @click="directToItem()">
             <i class="fa fa-arrow-right fa-lg mobile-icon-right"></i>
         </div>
