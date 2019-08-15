@@ -24,6 +24,7 @@
     "variationProperties.property.names.*",
     "variationProperties.property.position",
     "item.id",
+    "item.condition.names.*",
     "images.all.url*",
     "images.all.position",
     "images.all.path",
